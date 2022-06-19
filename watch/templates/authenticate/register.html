@@ -2,13 +2,13 @@
 
 {% block content %}
 <div class="card bg-dark text-white">
-    <img src="/static/media/wp.jpg" class="card-img" alt="...">
+    <img src="/static/media/wpi.jpg" class="card-img" alt="...">
     <div class="card-img-overlay">
         <div class="container">
             <div class="d-flex justify-content-center form_container"> 
               <div class="row"> 
                   <div class="col-md-12">
-                      <h2 class="mt-5" align="center"style="font-family: Oleo Script Swash Caps, cursive;font-size: 50px;">Register</h2>    
+                      <h2 class="mt-5" align="center"style="font-family: Oleo Script Swash Caps, cursive;font-size: 55px;">Register</h2>    
                       <form method="POST" action="" style="width: 450px;">
                           {% csrf_token %}
                           <div class="input-group mb-3">
@@ -45,12 +45,8 @@
         
         for (var field in form_fields){	
         form_fields[field].className += ' form-control'
-        }
-        
+        }       
         </script>
-      <h5 class="card-title"></h5>
-      <p class="card-text"></p>
-      <p class="card-text"></p>
     </div>
   </div>
 
