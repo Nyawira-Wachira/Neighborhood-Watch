@@ -3,6 +3,8 @@ from .forms import CreateUserForm
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from .models import Profile
 # Create your views here.
 
 def Register(request):
@@ -45,3 +47,10 @@ def Logout(request):
     logout(request)
 
     return redirect('login')
+
+@login_required
+def UserProfile(request):
+    user=request.user
+
+
+    return render(request, 'profile.html')
