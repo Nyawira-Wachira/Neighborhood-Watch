@@ -40,3 +40,8 @@ def Login(request):
                 messages.error (request, 'Check username or password and try again')
 
         return render(request, 'authenticate/login.html' )
+
+def Logout(request):
+    logout(request)
+
+    return redirect('login')
