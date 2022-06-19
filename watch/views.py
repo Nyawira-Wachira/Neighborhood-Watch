@@ -57,7 +57,7 @@ def UserProfile(request):
     return render(request, 'profile.html')
 
 @login_required
-def update(request):
+def ProfileUpdate(request):
     if request.method == 'POST':
             u_form = UserUpdateForm(request.POST, instance=request.user)
             p_form = ProfileUpdateForm(request.POST,
