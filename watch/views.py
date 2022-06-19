@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import UserUpdateForm, ProfileUpdateForm,NewPostForm
-from .models import Profile
+from .models import Profile,Post
 # Create your views here.
 
 def Register(request):
@@ -52,9 +52,10 @@ def Logout(request):
 @login_required
 def UserProfile(request):
     user=request.user
+    posts= Post.objects.filter(user=user).order_by('-posted')
 
 
-    return render(request, 'profile.html')
+    return render(request, 'profile.html',{'posts':posts})
 
 @login_required
 def ProfileUpdate(request):

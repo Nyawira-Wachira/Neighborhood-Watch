@@ -23,7 +23,23 @@
         <h6 style="font-size:19px;">Contact Details: <span class="text" style="color:dodgerblue; font-family:Arial, Helvetica, sans-serif; font-size:18px;">{{user.profile.contact_info}}</span></h6>        
       </div>  
     </div><br>  
-    <a href="{% url 'update' %}"><button type="button" class="btn btn-outline-primary">Edit Profile</button></a>   
+    <a href="{% url 'update' %}"><button type="button" class="btn btn-outline-primary">Edit Profile</button></a> 
+    <a href="{% url 'post' %}"><button type="button" class="btn btn-outline-success">Create Post</button></a>     
 </div>
+<div class="container my-5">
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-6 mb-3">
+            <div class="card">
+              <img src="{{post.picture.url}}" style="height: 300px;" class="card-img-top" alt="...">
+                <div class="card-body"> 
+                    <p class="card-text">{{post.caption}}</p>             
+                  <small><strong>{{post.posted}}</strong></small>                                             
+                </div>
+            </div>
+        </div>
+        {%  endfor %}
+    </div>
+  </div>    
 
 {% endblock content %}
