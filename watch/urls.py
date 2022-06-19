@@ -9,6 +9,8 @@ urlpatterns=[
     path('logout/',views.Logout, name='logout'),
     path('profile/',views.UserProfile, name='profile'),
     path('update/',views.ProfileUpdate, name='update'),
+    path('home/',views.Home, name='home'),
+    path('post/',views.CreatePost, name='post'),
 ]
 
 if settings.DEBUG:

@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import UserUpdateForm, ProfileUpdateForm
+from .forms import UserUpdateForm, ProfileUpdateForm,NewPostForm
 from .models import Profile
 # Create your views here.
 
@@ -78,3 +78,33 @@ def ProfileUpdate(request):
         'p_form': p_form
     }
     return render(request, 'update_profile.html', context)
+
+@login_required
+def CreatePost(request):
+    from .models import Post
+    user = request.user.id
+
+    if request.method == 'POST':
+        form = NewPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            picture = form.cleaned_data.get('picture')
+            caption = form.cleaned_data.get('caption')
+
+            p, created = Post.objects.get_or_create(picture=picture, caption=caption, user_id=user)
+            p.save()
+            return redirect('home')
+        
+    else:
+        form = NewPostForm()
+   
+    
+    return render(request, 'post.html',  {'form': form})
+
+def Home(request):
+    from .models import Post
+    user=request.user
+
+    posts = Post.objects.all().order_by('-posted')
+
+
+    return render(request, 'home.html',{'posts':posts} )
