@@ -9,7 +9,6 @@ def user_directory_path(instance, filename):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(default='default.png', upload_to='profile_pics')
-    bio = models.TextField()
     contact_info = models.CharField(max_length=100)
 
     def __str__(self):
