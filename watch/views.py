@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import UserUpdateForm, ProfileUpdateForm,NewPostForm,NewHoodForm
+from .forms import UserUpdateForm, ProfileUpdateForm,NewPostForm,NewHoodForm,HoodUpdateForm
 from .models import Profile,Post,Neighborhood
 # Create your views here.
 
@@ -143,3 +143,22 @@ def Hood(request):
 
 
     return render(request, 'hood.html',{'hoods':hoods} )
+
+@login_required
+def HoodUpdate(request):
+    if request.method == 'POST':
+            q_form = HoodUpdateForm(request.POST,
+                                    request.FILES,
+                                    instance=request.user)
+            if q_form.is_valid():
+                q_form.save()
+                messages.success(request, f'Neighborhood details updated!')
+                return redirect('hood')
+
+    else:
+        q_form = HoodUpdateForm(instance=request.user)
+
+    context = {
+        'q_form': q_form
+    }
+    return render(request, 'update_hood.html', context)

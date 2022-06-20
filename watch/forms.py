@@ -39,4 +39,9 @@ class NewHoodForm(forms.ModelForm):
     class Meta:
         model = Neighborhood
         fields = ('name','picture','location','occupants_count')
+
+class HoodUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Neighborhood
+        fields = ['name','picture','occupants_count']
     
