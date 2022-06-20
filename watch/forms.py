@@ -50,8 +50,6 @@ class CreateBusinessForm(forms.ModelForm):
     picture = forms.ImageField(required=True)
     email = forms.CharField(required=True)
 
-   
-    
     class Meta:
         model = Business
         fields = ('name','picture','email')

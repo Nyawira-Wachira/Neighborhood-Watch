@@ -47,13 +47,20 @@ class Neighborhood(models.Model):
     def __str__(self):
         return self.name
 
-
+# class User(models.Model):
+#     name = models.CharField(max_length=100)
+#     id = models.AutoField(primary_key=True)
+#     neighborhood_id = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
+#     email_address = models.CharField(max_length=100)
+ 
+#     def __str__(self):
+#         return self.name
 
 class Business(models.Model):
     name = models.CharField(max_length=100)
     picture=models.ImageField(upload_to=user_directory_path, verbose_name='Picture', null=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    neighborhood_id = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
+    neighborhood_id = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
     email = models.CharField(max_length=100)
  
     def __str__(self):

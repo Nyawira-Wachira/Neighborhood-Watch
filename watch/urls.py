@@ -15,6 +15,7 @@ urlpatterns=[
     path('hood/',views.Hood, name='hood'),
     path('hoodupdate/',views.HoodUpdate, name='hoodupdate'),
     path('business/',views.CreateBusiness, name='business'),
+    path('businesslist/',views.NewBusiness, name='businesslist'),
 ]
 
 if settings.DEBUG:

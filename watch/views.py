@@ -174,13 +174,22 @@ def CreateBusiness(request):
             name = form.cleaned_data.get('name')
             picture = form.cleaned_data.get('picture')
             email = form.cleaned_data.get('email')
-
-            b, created = Business.objects.get_or_create(name=name,picture=picture,email=email,user_id=user)
+            
+            b, created = Business.objects.get_or_create(name=name,picture=picture, email=email, user_id=user)
             b.save()
-            return redirect('business')
+            return redirect('businesslist')
         
     else:
         form = CreateBusinessForm()
    
     
-    return render(request, 'add_business.html',  {'form': form})
+    return render(request, 'create_business.html',  {'form': form})
+
+def NewBusiness(request):
+    from .models import Business
+    user=request.user
+
+    projects = Business.objects.all()
+
+
+    return render(request, 'business.html',{'projects':projects} )
