@@ -35,3 +35,17 @@ class Post(models.Model):
 
     def __str__(self):
         return self.caption
+
+class Neighborhood(models.Model):
+    neighborhood_id=models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=100)
+    picture=models.ImageField(upload_to=user_directory_path, verbose_name='Picture', null=False)
+    location=models.TextField(max_length=300, verbose_name='Location')
+    occupants_count= models.IntegerField(default=0)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    def __str__(self):
+        return self.caption

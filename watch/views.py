@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import UserUpdateForm, ProfileUpdateForm,NewPostForm
-from .models import Profile,Post
+from .forms import UserUpdateForm, ProfileUpdateForm,NewPostForm,NewHoodForm
+from .models import Profile,Post,Neighborhood
 # Create your views here.
 
 def Register(request):
@@ -100,7 +100,8 @@ def CreatePost(request):
    
     
     return render(request, 'post.html',  {'form': form})
-
+    
+@login_required
 def Home(request):
     from .models import Post
     user=request.user
@@ -109,3 +110,26 @@ def Home(request):
 
 
     return render(request, 'home.html',{'posts':posts} )
+
+@login_required
+def CreateHood(request):
+    from .models import Neighborhood
+    user = request.user.id
+
+    if request.method == 'POST':
+        form = NewHoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            name = form.cleaned_data.get('name')
+            picture = form.cleaned_data.get('picture')
+            location = form.cleaned_data.get('location')
+            occupants_count = form.cleaned_data.get('occupants_count')
+
+            h, created = Neighborhood.objects.get_or_create(name=name,picture=picture, location=location,occupants_count=occupants_count, user_id=user)
+            h.save()
+            return redirect('home')
+        
+    else:
+        form = NewHoodForm()
+   
+    
+    return render(request, 'create_hood.html',  {'form': form})

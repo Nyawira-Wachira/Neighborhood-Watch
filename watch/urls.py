@@ -11,6 +11,7 @@ urlpatterns=[
     path('update/',views.ProfileUpdate, name='update'),
     path('home/',views.Home, name='home'),
     path('post/',views.CreatePost, name='post'),
+    path('create/',views.CreateHood, name='create'),
 ]
 
 if settings.DEBUG:
