@@ -173,9 +173,9 @@ def CreateBusiness(request):
         if form.is_valid():
             name = form.cleaned_data.get('name')
             picture = form.cleaned_data.get('picture')
-            business_email_address = form.cleaned_data.get('business_email_address')
+            email = form.cleaned_data.get('email')
 
-            b, created = Business.objects.get_or_create(name=name,picture=picture, business_email_address=business_email_address, user_id=user)
+            b, created = Business.objects.get_or_create(name=name,picture=picture,email=email,user_id=user)
             b.save()
             return redirect('business')
         

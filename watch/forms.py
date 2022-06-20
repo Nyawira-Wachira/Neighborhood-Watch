@@ -48,8 +48,10 @@ class HoodUpdateForm(forms.ModelForm):
 class CreateBusinessForm(forms.ModelForm):
     name = forms.CharField(required=True)
     picture = forms.ImageField(required=True)
-    business_email_address = forms.CharField(required=True)
+    email = forms.CharField(required=True)
+
+   
     
     class Meta:
         model = Business
-        fields = ('name','picture',' business_email_address')
+        fields = ('name','picture','email')
