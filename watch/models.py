@@ -28,7 +28,7 @@ class Profile(models.Model):
 
 class Post(models.Model):
     id=models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    picture=models.ImageField(upload_to=user_directory_path, verbose_name='Picture', null=True)
+    picture=models.ImageField(upload_to=user_directory_path, verbose_name='Picture', null=False)
     caption=models.TextField(max_length=300, verbose_name='Caption')
     posted = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

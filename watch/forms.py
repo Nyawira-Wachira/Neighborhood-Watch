@@ -22,7 +22,7 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['profile_picture','contact_info']
 
 class NewPostForm(forms.ModelForm):
-	picture = forms.ImageField(required=False)
+	picture = forms.ImageField(required=True)
 	caption = forms.CharField(widget=forms.Textarea(attrs={'class': 'input is-medium'}), required=True)
 	
 	class Meta:

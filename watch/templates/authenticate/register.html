@@ -17,15 +17,27 @@
                       <form method="POST" action="" style="width: 450px;">
                           {% csrf_token %}
                           <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
                               {{ form.username}}
                           </div>
                               <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                                </div>                                
                                   {{ form.email}}
                               </div>
                               <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                </div>
                                   {{ form.password1}}
                               </div>
                               <div class="input-group mb-2">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                </div>
                                   {{ form.password2}}       
                               </div>
                               <button type="submit" type="submit" class="btn btn-light mt-3">Sign Up</button>
