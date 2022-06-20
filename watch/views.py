@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import UserUpdateForm, ProfileUpdateForm,NewPostForm,NewHoodForm,HoodUpdateForm
-from .models import Profile,Post,Neighborhood
+from .forms import UserUpdateForm, ProfileUpdateForm,NewPostForm,NewHoodForm,HoodUpdateForm,CreateBusinessForm
+from .models import Profile,Post,Neighborhood,Business
 # Create your views here.
 
 def Register(request):
@@ -162,3 +162,25 @@ def HoodUpdate(request):
         'q_form': q_form
     }
     return render(request, 'update_hood.html', context)
+
+@login_required
+def CreateBusiness(request):
+    from .models import Business
+    user = request.user.id
+
+    if request.method == 'POST':
+        form = CreateBusinessForm(request.POST, request.FILES)
+        if form.is_valid():
+            name = form.cleaned_data.get('name')
+            picture = form.cleaned_data.get('picture')
+            business_email_address = form.cleaned_data.get('business_email_address')
+
+            b, created = Business.objects.get_or_create(name=name,picture=picture, business_email_address=business_email_address, user_id=user)
+            b.save()
+            return redirect('business')
+        
+    else:
+        form = CreateBusinessForm()
+   
+    
+    return render(request, 'add_business.html',  {'form': form})

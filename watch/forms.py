@@ -2,7 +2,7 @@ from unicodedata import name
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile,Post,Neighborhood
+from .models import Profile,Post,Neighborhood,Business
 
 
 class CreateUserForm(UserCreationForm):
@@ -44,4 +44,12 @@ class HoodUpdateForm(forms.ModelForm):
     class Meta:
         model = Neighborhood
         fields = ['name','picture','occupants_count']
+
+class CreateBusinessForm(forms.ModelForm):
+    name = forms.CharField(required=True)
+    picture = forms.ImageField(required=True)
+    business_email_address = forms.CharField(required=True)
     
+    class Meta:
+        model = Business
+        fields = ('name','picture',' business_email_address')
