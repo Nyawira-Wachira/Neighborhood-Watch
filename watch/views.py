@@ -37,7 +37,7 @@ def Login(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('profile')
+                return redirect('hood')
 
             else:
                 messages.error (request, 'Check username or password and try again')
@@ -100,7 +100,7 @@ def CreatePost(request):
    
     
     return render(request, 'post.html',  {'form': form})
-    
+
 @login_required
 def Home(request):
     from .models import Post
@@ -126,10 +126,20 @@ def CreateHood(request):
 
             h, created = Neighborhood.objects.get_or_create(name=name,picture=picture, location=location,occupants_count=occupants_count, user_id=user)
             h.save()
-            return redirect('home')
+            return redirect('hood')
         
     else:
         form = NewHoodForm()
    
     
     return render(request, 'create_hood.html',  {'form': form})
+
+
+def Hood(request):
+    from .models import Neighborhood
+    user=request.user
+
+    hoods = Neighborhood.objects.all()
+
+
+    return render(request, 'hood.html',{'hoods':hoods} )

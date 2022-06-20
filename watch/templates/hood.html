@@ -1,15 +1,29 @@
-<div class="container my-5">
+{% extends 'base.html'%}
+
+ {% block content %}
+ <div class="container mt-3">
+    <a href="{% url 'create' %}" class="btn btn-outline-primary my-2">Add Hood</a>
+ </div>
+<div class="container mb-4">
     <div class="row">
-        {% for post in posts %}
-        <div class="col-md-6 mb-3">
+        <h2 align="center" style="font-family: Oleo Script Swash Caps, cursive;font-size:35px;">Choose Your Hood</h2>  
+        {% for hood in hoods %}
+        <div class="col-md-4 mb-3">
             <div class="card">
-              <img src="{{post.picture.url}}" style="height: 300px;" class="card-img-top" alt="...">
-                <div class="card-body"> 
-                    <p class="card-text">{{post.caption}}</p>             
-                  <small><strong>{{post.posted}}</strong></small>                                             
+              <img src="{{hood.picture.url}}" style="height: 300px;" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h3 style="font-family: Oleo Script Swash Caps, cursive;">{{hood.name}} Neighborhood </h3>  
+                    <p class="card-text">Location : {{hood.location}}</p>             
+                  <small><strong>Occupants : {{hood.occupants_count}}</strong></small> 
+                  <div class="container my-3">
+                    <a href="{% url 'home' %}" class="btn btn-outline-info my-2">Join Hood</a>
+                 </div>
+
                 </div>
             </div>
         </div>
         {%  endfor %}
     </div>
-  </div>    
+  </div>  
+
+  {% endblock %}  

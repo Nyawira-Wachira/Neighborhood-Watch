@@ -12,6 +12,7 @@ urlpatterns=[
     path('home/',views.Home, name='home'),
     path('post/',views.CreatePost, name='post'),
     path('create/',views.CreateHood, name='create'),
+    path('hood/',views.Hood, name='hood'),
 ]
 
 if settings.DEBUG:
