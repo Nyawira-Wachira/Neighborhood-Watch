@@ -59,9 +59,30 @@ class Neighborhood(models.Model):
 class Business(models.Model):
     name = models.CharField(max_length=100)
     picture=models.ImageField(upload_to=user_directory_path, verbose_name='Picture', null=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     neighborhood_id = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
     email = models.CharField(max_length=100)
+ 
+    def __str__(self):
+        return self.name
+
+class HealthCentre(models.Model):
+    name = models.CharField(max_length=100)
+    picture=models.ImageField(upload_to=user_directory_path, verbose_name='Picture', null=False)
+    neighborhood_id = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    contact_info = models.CharField(max_length=100)
+
+ 
+    def __str__(self):
+        return self.name
+
+class PoliceAuthority(models.Model):
+    name = models.CharField(max_length=100)
+    picture=models.ImageField(upload_to=user_directory_path, verbose_name='Picture', null=False)  
+    neighborhood_id = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    contact_info = models.CharField(max_length=100)
  
     def __str__(self):
         return self.name

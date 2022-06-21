@@ -53,3 +53,8 @@ class CreateBusinessForm(forms.ModelForm):
     class Meta:
         model = Business
         fields = ('name','picture','email')
+
+class BizUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        fields = ['name','picture','email']

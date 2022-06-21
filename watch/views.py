@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import UserUpdateForm, ProfileUpdateForm,NewPostForm,NewHoodForm,HoodUpdateForm,CreateBusinessForm
-from .models import Profile,Post,Neighborhood,Business
+from .forms import UserUpdateForm, ProfileUpdateForm,NewPostForm,NewHoodForm,HoodUpdateForm,CreateBusinessForm,BizUpdateForm
+from .models import Profile,Post,Neighborhood,Business,HealthCentre
 # Create your views here.
 
 def Register(request):
@@ -193,3 +193,32 @@ def NewBusiness(request):
 
 
     return render(request, 'business.html',{'projects':projects} )
+
+
+@login_required
+def BizUpdate(request):
+    if request.method == 'POST':
+            a_form = BizUpdateForm(request.POST,
+                                    request.FILES,
+                                    instance=request.user)
+            if a_form.is_valid():
+                a_form.save()
+                messages.success(request, f'Business details updated!')
+                return redirect('hood')
+
+    else:
+        a_form = BizUpdateForm(instance=request.user)
+
+    context = {
+        'a_form': a_form
+    }
+    return render(request, 'update_business.html', context)
+
+def Hospital(request):
+    from .models import HealthCentre
+    user=request.user
+
+    centres = HealthCentre.objects.all()
+
+
+    return render(request, 'hospital.html',{'centres':centres} )
