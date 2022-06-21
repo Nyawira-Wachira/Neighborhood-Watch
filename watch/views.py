@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import UserUpdateForm, ProfileUpdateForm,NewPostForm,NewHoodForm,HoodUpdateForm,CreateBusinessForm,BizUpdateForm
-from .models import Profile,Post,Neighborhood,Business,HealthCentre
+from .models import Profile,Post,Neighborhood,Business,HealthCentre,PoliceAuthority
 # Create your views here.
 
 def Register(request):
@@ -222,3 +222,12 @@ def Hospital(request):
 
 
     return render(request, 'hospital.html',{'centres':centres} )
+
+def Security(request):
+    from .models import PoliceAuthority
+    user=request.user
+
+    services = PoliceAuthority.objects.all()
+
+
+    return render(request, 'hospital.html',{'services':services} )

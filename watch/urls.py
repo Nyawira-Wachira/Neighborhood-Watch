@@ -18,6 +18,7 @@ urlpatterns=[
     path('businesslist/',views.NewBusiness, name='businesslist'),
     path('bizupdate/',views.BizUpdate, name='bizupdate'),
     path('hospital/',views.Hospital, name='hospital'),
+    path('security/',views.Security, name='security'),
 ]
 
 if settings.DEBUG:
