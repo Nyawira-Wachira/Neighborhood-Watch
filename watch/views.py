@@ -246,3 +246,16 @@ def search_results(request):
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})
 
+# def join_hood(request, id):
+#     hood = get_object_or_404(Neighbourhood, id=id)
+
+#     request.user.profile.hood = hood
+#     request.user.profile.save()
+#     return redirect('neighbourhood')
+
+
+# def leave_hood(request, id):
+#     hood = get_object_or_404(Neighbourhood, id=id)
+#     request.user.profile.hood = None
+#     request.user.profile.save()
+#     return redirect('neighbourhood')
