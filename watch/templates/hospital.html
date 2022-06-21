@@ -2,14 +2,16 @@
 
  {% block content %}
 <div class="container my-5">
+    <div class="d-flex justify-content-center form_container">
     <div class="row">
         {% for centre in centres %}
-        <div class="col-md-4 mb-3">
+        <div class="col-md-12 mb-3">
             <div class="card">
               <img src="{{centre.picture.url}}" style="height: 300px;" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h3 ststyle="font-family: Oleo Script Swash Caps, cursive;font-size:35px;">Name: {{centre.name}}</h3>  
-                    <p class="card-text">{{centre.contact_info}}</p>             
+                    <h3 style="font-family: Oleo Script Swash Caps, cursive;font-size:35px;">Name: {{centre.name}}</h3>  
+                    <p class="card-text">Contacts: {{centre.contact_info}}</p>
+                    <p class="card-text">Email: {{centre.email}}</p>               
                   <div class="container my-3">
                     
                  </div>
@@ -18,6 +20,7 @@
             </div>
         </div>
         {%  endfor %}
+    </div>
     </div>
   </div>  
 

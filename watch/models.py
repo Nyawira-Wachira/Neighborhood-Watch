@@ -26,16 +26,6 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             img.save(self.profile_picture.path) 
 
-class Post(models.Model):
-    id=models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    picture=models.ImageField(upload_to=user_directory_path, verbose_name='Picture', null=False)
-    caption=models.TextField(max_length=300, verbose_name='Caption')
-    posted = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.caption
-
 class Neighborhood(models.Model):
     neighborhood_id=models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
@@ -47,6 +37,18 @@ class Neighborhood(models.Model):
     def __str__(self):
         return self.name
 
+class Post(models.Model):
+    id=models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    picture=models.ImageField(upload_to=user_directory_path, verbose_name='Picture', null=False)
+    caption=models.TextField(max_length=300, verbose_name='Caption')
+    neighborhood_id = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
+    posted = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.caption
+
+
 # class User(models.Model):
 #     name = models.CharField(max_length=100)
 #     id = models.AutoField(primary_key=True)
@@ -56,12 +58,18 @@ class Neighborhood(models.Model):
 #     def __str__(self):
 #         return self.name
 
-class Business(models.Model):
+class Business(models.Model):    
     name = models.CharField(max_length=100)
     picture=models.ImageField(upload_to=user_directory_path, verbose_name='Picture', null=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     neighborhood_id = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
     email = models.CharField(max_length=100)
+
+    @classmethod
+    def search_by_name(cls,search_term):
+        businesses = cls.objects.filter(name__icontains=search_term)
+        return businesses
+
  
     def __str__(self):
         return self.name
@@ -72,6 +80,7 @@ class HealthCentre(models.Model):
     neighborhood_id = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     contact_info = models.CharField(max_length=100)
+    email = models.CharField(max_length=100,null=True,blank=True)
 
  
     def __str__(self):
@@ -83,6 +92,7 @@ class PoliceAuthority(models.Model):
     neighborhood_id = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     contact_info = models.CharField(max_length=100)
+    email = models.CharField(max_length=100, null=True,blank=True)
  
     def __str__(self):
         return self.name
