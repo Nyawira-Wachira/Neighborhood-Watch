@@ -20,6 +20,7 @@ urlpatterns=[
     path('hospital/',views.Hospital, name='hospital'),
     path('security/',views.Security, name='security'),
     path('search/', views.search_results, name='search_results'),
+    path('searchhood/', views.search_hoods, name='search_hoods'),
 ]
 
 if settings.DEBUG:

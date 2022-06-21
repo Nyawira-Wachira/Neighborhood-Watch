@@ -246,6 +246,20 @@ def search_results(request):
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})
 
+def search_hoods(request):
+    from .models import Neighborhood
+
+    if 'hood' in request.GET and request.GET["hood"]:
+        search_term = request.GET.get("hood")
+        searched_hoods = Neighborhood.search_by_name(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search_hood.html',{"message":message,"hoods": searched_hoods})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html',{"message":message})
+
 # def join_hood(request, id):
 #     hood = get_object_or_404(Neighbourhood, id=id)
 
