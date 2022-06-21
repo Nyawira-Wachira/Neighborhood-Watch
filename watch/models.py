@@ -34,6 +34,12 @@ class Neighborhood(models.Model):
     occupants_count= models.IntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    @classmethod
+    def search_by_name(cls,search_term):
+        hoods = cls.objects.filter(name__icontains=search_term)
+        return hoods
+
+
     def __str__(self):
         return self.name
 
