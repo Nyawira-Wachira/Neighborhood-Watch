@@ -1,0 +1,49 @@
+{% extends 'base.html'%}
+
+ {% block content %}
+ <div class="container my-2">
+
+    <div class="row">
+      {% if hoods %}
+        <h2>Found {{ hoods|length }} of searched term {{message}}</h2>
+      {% else %}
+        <h2> Found 0 neighborhoods for the search term... {{message}}</h2>
+      {% endif %}
+  
+    </div>
+  
+    {% if hoods %}
+        <a href="{% url 'home' %}" class="btn btn-outline-info my-3">Go back</a>
+    </div>
+    {% for hood in hoods %}
+    <div class="container">
+        <div class="row">
+              <div class="col-md-12 mb-5"> 
+                  <h3 align="center" style="font-family: Oleo Script Swash Caps, cursive;">{{hood.name}}</h3> 
+              </div>
+        </div> 
+       
+        <div class="row">
+         <div class="col-md-6 mb-5">
+            <div class="card">    
+                <img style="height:350px;"src="{{hood.picture.url}}" class="card-img-top" alt="...">
+            </div>
+         </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <p style="font-family: Satisfy, cursive; font-size:25px;">Title: {{hood.name}}</p>
+                        <p>{{hood.occupants_count}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div> 
+      {% endfor %}
+  
+    {% endif %}
+    </div>
+  </div>
+  {% endblock %}
+  

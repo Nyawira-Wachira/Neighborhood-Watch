@@ -1,0 +1,23 @@
+{% extends 'authenticate/index.html'%}
+
+{% block content %}
+<style>
+    body {
+      background-image: url("/static/media/wp4.jpg");
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+    </style>
+
+<div class="container">
+    <div class="d-flex justify-content-center form_container"> 
+      <div class="row"> 
+          <div class="col-md-12">
+            <a href="{% url 'register' %}"><button type="button" class="btn btn-outline-dark btn-rounded btn-sm" data-mdb-ripple-color="dark" style="margin-top:270px;">Hood Watch</button></a>
+          </div>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

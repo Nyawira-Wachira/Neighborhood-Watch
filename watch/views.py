@@ -8,6 +8,12 @@ from .forms import UserUpdateForm, ProfileUpdateForm,NewPostForm,NewHoodForm,Hoo
 from .models import Profile,Post,Neighborhood,Business,HealthCentre,PoliceAuthority
 # Create your views here.
 
+
+def Index(request):
+
+
+    return render(request, 'landing.html')
+
 def Register(request):
     if request.user.is_authenticated:
         return redirect('profile')
@@ -254,7 +260,7 @@ def search_hoods(request):
         searched_hoods = Neighborhood.search_by_name(search_term)
         message = f"{search_term}"
 
-        return render(request, 'search_hood.html',{"message":message,"hoods": searched_hoods})
+        return render(request, 'search.html',{"message":message,"hoods": searched_hoods})
 
     else:
         message = "You haven't searched for any term"
